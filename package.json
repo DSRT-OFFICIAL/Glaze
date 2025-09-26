@@ -1,1 +1,12 @@
 
+{
+  "name": "glaze",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "type": "module",
+  "description": "Glaze 3D Engine Library",
+  "keywords": ["3D", "WebGL", "Engine", "Glaze"],
+  "author": "dsrt",
+  "license": "MIT"
+}
