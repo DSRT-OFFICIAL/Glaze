@@ -1,3 +1,6 @@
+// ==================== GlazeBasicColors.js ====================
+// Palet warna dasar untuk Glaze
+
 export const GlazeBasicColors = {
   black: "#000000",
   white: "#FFFFFF",
