@@ -1,6 +1,6 @@
 # Glaze
 
-**Glaze** is a professional color library inspired by Three.js structure.  
+**Glaze** is a professional color library.  
 Supports color conversions, manipulations, gradients, palettes, accessibility checks, random colors, and more.
 
 ## Features
