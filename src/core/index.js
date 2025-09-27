@@ -1,14 +1,6 @@
-export * from './Engine.js';
-export * from './Object3D.js';
-export * from './Scene.js';
-export * from './Camera.js';
-export * from './PerspectiveCamera.js';
-export * from './OrthographicCamera.js';
-export * from './Mesh.js';
-export * from './Material.js';
-export * from './Light.js';
-export * from './Renderer.js';
-export * from './Raycaster.js';
-export * from './Frustum.js';
-export * from './Layers.js';
-export * from './Fog.js';
+// -----------------------
+// Math & Core
+// -----------------------
+export * from './math/index.js';  // Meng-include Color, Vector, Matrix, Quaternion, Euler
+
+// Jika nanti ada modul core tambahan, tinggal ditambahkan di sini
