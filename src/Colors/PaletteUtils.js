@@ -1,5 +1,5 @@
 // ==================== PaletteUtils.js ====================
-import { hexToRgb, rgbToHex, hexToHsl, hslToHex } from "./ColorsConversion.js";
+import { hexToHsl, hslToHex } from "./ColorsConversion.js";
 
 // ---- Generate Shades (darker) & Tints (lighter) ----
 export function generateShades(hex, steps = 5) {
@@ -29,6 +29,16 @@ export function generateComplementary(hex) {
   return [hex, hslToHex(compHue, s, l)];
 }
 
+// ---- Generate Split Complementary Colors ----
+export function generateSplitComplementary(hex, angle = 30) {
+  const { h, s, l } = hexToHsl(hex);
+  return [
+    hex,
+    hslToHex((h + 180 - angle + 360) % 360, s, l),
+    hslToHex((h + 180 + angle) % 360, s, l),
+  ];
+}
+
 // ---- Generate Analogous Colors ----
 export function generateAnalogous(hex, angle = 30) {
   const { h, s, l } = hexToHsl(hex);
@@ -46,6 +56,28 @@ export function generateTriadic(hex) {
     hex,
     hslToHex((h + 120) % 360, s, l),
     hslToHex((h + 240) % 360, s, l),
+  ];
+}
+
+// ---- Generate Tetradic Colors (Rectangle) ----
+export function generateTetradic(hex) {
+  const { h, s, l } = hexToHsl(hex);
+  return [
+    hex,
+    hslToHex((h + 90) % 360, s, l),
+    hslToHex((h + 180) % 360, s, l),
+    hslToHex((h + 270) % 360, s, l),
+  ];
+}
+
+// ---- Generate Square Colors ----
+export function generateSquare(hex) {
+  const { h, s, l } = hexToHsl(hex);
+  return [
+    hex,
+    hslToHex((h + 90) % 360, s, l),
+    hslToHex((h + 180) % 360, s, l),
+    hslToHex((h + 270) % 360, s, l),
   ];
 }
 
