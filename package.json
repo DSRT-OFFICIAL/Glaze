@@ -1,15 +1,10 @@
 {
   "name": "glaze",
   "version": "1.0.0",
-  "description": "Pro-level color library, inspired by Three.js structure",
   "main": "dist/glaze.cjs.js",
   "module": "dist/glaze.esm.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    "import": "./dist/glaze.esm.js",
-    "require": "./dist/glaze.cjs.js"
-  },
   "scripts": {
+    "prepare": "husky install",
     "build": "rollup -c",
     "release": "semantic-release"
   },
@@ -24,6 +19,15 @@
     "@semantic-release/npm": "^9.0.0",
     "@semantic-release/github": "^9.0.0",
     "@semantic-release/commit-analyzer": "^10.0.0",
-    "@semantic-release/release-notes-generator": "^11.0.0"
+    "@semantic-release/release-notes-generator": "^11.0.0",
+    "husky": "^8.0.0",
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "lint-staged": "^14.0.0",
+    "eslint": "^8.0.0"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.ts": "eslint --fix"
   }
 }
