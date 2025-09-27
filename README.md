@@ -1,52 +1,71 @@
-# Glaze 🎨
+# Glaze
 
-Library warna siap pakai untuk semua proyek (ESM & CJS).
+Glaze is a color utility library for:
 
-[![CI](https://github.com/DSRT-OFFICIAL/Glaze/actions/workflows/publish.yml/badge.svg)](https://github.com/DSRT-OFFICIAL/Glaze/actions/workflows/publish.yml)
-[![npm version](https://img.shields.io/npm/v/@glaze-artweb/glaze.svg)](https://www.npmjs.com/package/@glaze-artweb/glaze)
-[![codecov](https://codecov.io/gh/DSRT-OFFICIAL/Glaze/branch/main/graph/badge.svg?token=YOUR_CODECOV_TOKEN)](https://codecov.io/gh/DSRT-OFFICIAL/Glaze)
+Color conversion (HEX ↔ RGB/HSL)
 
----
+Color manipulation (lighten, darken, opacity, mix)
 
-## ✨ Instalasi
-```bash
+Palettes and themes (shades, tints, complementary, triadic)
+
+Color accessibility (contrast, WCAG compliance)
+
+Random color & palette generation
+
+
+Install
+
 npm install @glaze-artweb/glaze
 
-📦 Pemakaian
+Usage
 
-ESM
+import { getColor, Theme } from "@glaze-artweb/glaze";
 
-import colors from "@glaze-artweb/glaze";
+const primary500 = getColor("primary", 500);
+console.log(primary500);
 
-console.log(colors.red500); // #EF4444
-
-CJS
-
-const colors = require("@glaze-artweb/glaze/cjs");
-
-console.log(colors.blue600); // #2563EB
+console.log(Theme.LightTheme.primary.DEFAULT);
 
 
 ---
 
-🚀 Scripts
+5. Publishing to NPM
 
-npm test → jalanin unit test
+1. Make sure the version in package.json is correct (e.g., 1.0.0).
 
-npm run release:patch → naik versi patch & push tag
 
-npm run release:minor → naik versi minor
+2. First-time publish:
 
-npm run release:major → naik versi major
+
+
+npm publish --access public
+
+3. For subsequent updates (patch/minor/major):
+
+
+
+npm version patch   # or minor/major
+npm publish
+
+> Note: --access public is required for scoped packages (@glaze-artweb/glaze) to be publicly accessible.
+
 
 
 
 ---
 
-✅ CI/CD
+6. Importing in Other Projects
 
-GitHub Actions → build & test otomatis
+ESM (default for Glaze):
 
-npm → publish otomatis saat ada tag
 
-Codecov → laporan coverage
+import { getColor, Theme } from "@glaze-artweb/glaze";
+
+Browser via CDN (optional)
+If you want to use it like Three.js via <script> CDN, you can use unpkg:
+
+
+<script type="module">
+import { getColor } from 'https://unpkg.com/@glaze-artweb/glaze@1.0.0/src/index.js';
+console.log(getColor("primary", 500));
+</script>
