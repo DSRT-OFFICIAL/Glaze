@@ -1,43 +1,21 @@
 {
-  "name": "@glaze-artweb/glaze",
+  "name": "glaze",
   "version": "1.0.0",
-  "description": "Glaze - Color utilities for conversion, manipulation, accessibility, palettes, and themes.",
-  "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "description": "Pro-level color library, inspired by Three.js structure",
+  "main": "dist/glaze.cjs.js",
+  "module": "dist/glaze.esm.js",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./src/index.js",
-      "require": "./src/index.js"
-    }
+    "import": "./dist/glaze.esm.js",
+    "require": "./dist/glaze.cjs.js"
   },
-  "files": ["src"],
-  "keywords": ["colors", "palette", "theme", "glaze", "utilities", "design-system"],
   "scripts": {
-    "build": "echo 'Pure ESM - no build required'",
-    "test": "jest --coverage",
-    "lint": "eslint src --ext .js",
-    "release:patch": "npm version patch && git push origin main --tags",
-    "release:minor": "npm version minor && git push origin main --tags",
-    "release:major": "npm version major && git push origin main --tags"
+    "build": "rollup -c"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DSRT-OFFICIAL/Glaze.git"
-  },
-  "author": "DSRT-OFFICIAL",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/DSRT-OFFICIAL/Glaze/issues"
-  },
-  "homepage": "https://github.com/DSRT-OFFICIAL/Glaze#readme",
   "devDependencies": {
-    "jest": "^29.7.0",
-    "eslint": "^9.11.1"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "collectCoverageFrom": ["src/**/*.js"],
-    "coverageReporters": ["text", "lcov"]
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-terser": "^7.0.0"
   }
 }
