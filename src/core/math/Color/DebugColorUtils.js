@@ -1,42 +1,60 @@
-// debugAllColors.js
-import { ColorFactory, lerpColors, invertColor } from './FullColorFactory.js';
-import { BasicColors } from './BasicGlazeColor.js';
-import { ExtendedColors } from './ExtendedGlazeColors.js';
-import { CustomColors } from './CustomColors.js';
+// Glaze/src/core/math/Color/DebugColorUtils.js
+import { Color } from './Color.js';
+import { ColorFactory } from './FullColorFactory.js';
 
-const AllColors = { ...BasicColors, ...ExtendedColors, ...CustomColors };
+/**
+ * Debug helper internal untuk development.
+ * Tidak diexport ke publik karena tidak stabil.
+ */
 
-function rgbArray(color) {
-    return `[${(color.r*255).toFixed(0)}, ${(color.g*255).toFixed(0)}, ${(color.b*255).toFixed(0)}]`;
+// -------------------------
+// Convert Color ke string
+// -------------------------
+export function colorToArrayString(color) {
+    if (!(color instanceof Color)) return '[invalid color]';
+    return `[${color.r.toFixed(3)}, ${color.g.toFixed(3)}, ${color.b.toFixed(3)}]`;
 }
 
-function hslArray(color) {
-    const { h, s, l } = color.getHSL ? color.getHSL() : { h: 0, s: 0, l: 0 };
-    return `[h:${(h*360).toFixed(0)}, s:${(s*100).toFixed(0)}%, l:${(l*100).toFixed(0)}%]`;
+// -------------------------
+// Log warna ke console
+// -------------------------
+export function logColor(label, color) {
+    console.log(`${label}: ${colorToArrayString(color)}`);
 }
 
-console.log('===== DETAILED COLOR DEBUG =====');
-
-for (const key in AllColors) {
-    const color = AllColors[key];
-
-    const cfOriginal = ColorFactory(key);
-    const normalizedName = key.replace(/\s+/g, '').toLowerCase();
-    const cfNormalized = ColorFactory(normalizedName);
-
-    const clone = cfOriginal.clone();
-    const hex = cfOriginal.getHex ? cfOriginal.getHex() : 'N/A';
-    const lerpTest = lerpColors(cfOriginal, cfOriginal, 0.5);
-    const invTest = invertColor(cfOriginal);
-
-    console.log(`\n--- ${key} ---`);
-    console.log(`Normalized access: ${normalizedName}`);
-    console.log(`RGB: ${rgbArray(cfOriginal)}`);
-    console.log(`Hex: 0x${hex.toString(16).padStart(6,'0')}`);
-    console.log(`HSL: ${hslArray(cfOriginal)}`);
-    console.log(`Clone equal object? ${clone === cfOriginal ? 'FAIL' : 'OK'}`);
-    console.log(`Lerp test: ${lerpTest ? 'OK' : 'FAIL'}`);
-    console.log(`Invert test: ${invTest ? 'OK' : 'FAIL'}`);
+// -------------------------
+// Bandingkan dua warna
+// -------------------------
+export function compareColors(c1, c2) {
+    if (!(c1 instanceof Color) || !(c2 instanceof Color)) {
+        console.warn('compareColors: invalid input');
+        return;
+    }
+    const equal = c1.equals(c2);
+    console.log(
+        `Compare: ${colorToArrayString(c1)} vs ${colorToArrayString(c2)} => ${equal ? 'EQUAL' : 'DIFFERENT'}`
+    );
+    return equal;
 }
 
-console.log('===== COLOR DEBUG DONE =====');
+// -------------------------
+// Debug semua warna dari object
+// -------------------------
+export function debugAllColors(colorObj, prefix = '') {
+    for (const key in colorObj) {
+        const color = colorObj[key];
+        if (color instanceof Color) {
+            logColor(`${prefix}${key}`, color);
+        }
+    }
+}
+
+// -------------------------
+// Debug string input via ColorFactory
+// -------------------------
+export function debugFactory(inputList) {
+    inputList.forEach(name => {
+        const color = ColorFactory(name);
+        logColor(name, color);
+    });
+}
