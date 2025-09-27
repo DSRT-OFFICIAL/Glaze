@@ -1,19 +1,10 @@
 {
-  "name": "glaze",
+  "name": "@glaze-artweb/glaze",
   "version": "1.0.0",
-  "description": "Universal color library (ESM + CJS) by DSRT-OFFICIAL",
-  "main": "./src/index.js",
-  "module": "./src/Color/Colors-libs.esm.js",
-  "exports": {
-    ".": {
-      "require": "./src/index.js",
-      "import": "./src/index.js"
-    }
-  },
+  "main": "src/index.js",
+  "module": "src/index.js",
   "type": "module",
   "files": [
     "src"
-  ],
-  "author": "DSRT-OFFICIAL",
-  "license": "MIT"
+  ]
 }
