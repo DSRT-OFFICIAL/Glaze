@@ -1,11 +1,11 @@
-// 🎨 Semua warna lengkap (Tailwind palette + dasar)
-const colors = {
-  // === Dasar ===
+// 🎨 Semua warna umum lengkap
+export const colors = {
+  // Dasar
   black: "#000000",
   white: "#FFFFFF",
   transparent: "transparent",
 
-  // === Slate ===
+  // Slate
   slate50: "#F8FAFC",
   slate100: "#F1F5F9",
   slate200: "#E2E8F0",
@@ -17,7 +17,7 @@ const colors = {
   slate800: "#1E293B",
   slate900: "#0F172A",
 
-  // === Gray ===
+  // Gray
   gray50: "#F9FAFB",
   gray100: "#F3F4F6",
   gray200: "#E5E7EB",
@@ -29,7 +29,7 @@ const colors = {
   gray800: "#1F2937",
   gray900: "#111827",
 
-  // === Zinc ===
+  // Zinc
   zinc50: "#FAFAFA",
   zinc100: "#F4F4F5",
   zinc200: "#E4E4E7",
@@ -41,7 +41,7 @@ const colors = {
   zinc800: "#27272A",
   zinc900: "#18181B",
 
-  // === Neutral ===
+  // Neutral
   neutral50: "#FAFAFA",
   neutral100: "#F5F5F5",
   neutral200: "#E5E5E5",
@@ -53,7 +53,7 @@ const colors = {
   neutral800: "#262626",
   neutral900: "#171717",
 
-  // === Stone ===
+  // Stone
   stone50: "#FAFAF9",
   stone100: "#F5F5F4",
   stone200: "#E7E5E4",
@@ -65,7 +65,7 @@ const colors = {
   stone800: "#292524",
   stone900: "#1C1917",
 
-  // === Red ===
+  // Red
   red50: "#FEF2F2",
   red100: "#FEE2E2",
   red200: "#FECACA",
@@ -77,7 +77,7 @@ const colors = {
   red800: "#991B1B",
   red900: "#7F1D1D",
 
-  // === Orange ===
+  // Orange
   orange50: "#FFF7ED",
   orange100: "#FFEDD5",
   orange200: "#FED7AA",
@@ -89,7 +89,7 @@ const colors = {
   orange800: "#9A3412",
   orange900: "#7C2D12",
 
-  // === Amber ===
+  // Amber
   amber50: "#FFFBEB",
   amber100: "#FEF3C7",
   amber200: "#FDE68A",
@@ -101,7 +101,7 @@ const colors = {
   amber800: "#92400E",
   amber900: "#78350F",
 
-  // === Yellow ===
+  // Yellow
   yellow50: "#FEFCE8",
   yellow100: "#FEF9C3",
   yellow200: "#FEF08A",
@@ -113,7 +113,7 @@ const colors = {
   yellow800: "#854D0E",
   yellow900: "#713F12",
 
-  // === Lime ===
+  // Lime
   lime50: "#F7FEE7",
   lime100: "#ECFCCB",
   lime200: "#D9F99D",
@@ -125,7 +125,7 @@ const colors = {
   lime800: "#3F6212",
   lime900: "#365314",
 
-  // === Green ===
+  // Green
   green50: "#F0FDF4",
   green100: "#DCFCE7",
   green200: "#BBF7D0",
@@ -137,7 +137,7 @@ const colors = {
   green800: "#166534",
   green900: "#14532D",
 
-  // === Emerald ===
+  // Emerald
   emerald50: "#ECFDF5",
   emerald100: "#D1FAE5",
   emerald200: "#A7F3D0",
@@ -149,7 +149,7 @@ const colors = {
   emerald800: "#065F46",
   emerald900: "#064E3B",
 
-  // === Teal ===
+  // Teal
   teal50: "#F0FDFA",
   teal100: "#CCFBF1",
   teal200: "#99F6E4",
@@ -161,7 +161,7 @@ const colors = {
   teal800: "#115E59",
   teal900: "#134E4A",
 
-  // === Cyan ===
+  // Cyan
   cyan50: "#ECFEFF",
   cyan100: "#CFFAFE",
   cyan200: "#A5F3FC",
@@ -173,7 +173,7 @@ const colors = {
   cyan800: "#155E75",
   cyan900: "#164E63",
 
-  // === Sky ===
+  // Sky
   sky50: "#F0F9FF",
   sky100: "#E0F2FE",
   sky200: "#BAE6FD",
@@ -185,7 +185,7 @@ const colors = {
   sky800: "#075985",
   sky900: "#0C4A6E",
 
-  // === Blue ===
+  // Blue
   blue50: "#EFF6FF",
   blue100: "#DBEAFE",
   blue200: "#BFDBFE",
@@ -197,7 +197,7 @@ const colors = {
   blue800: "#1E40AF",
   blue900: "#1E3A8A",
 
-  // === Indigo ===
+  // Indigo
   indigo50: "#EEF2FF",
   indigo100: "#E0E7FF",
   indigo200: "#C7D2FE",
@@ -209,7 +209,7 @@ const colors = {
   indigo800: "#3730A3",
   indigo900: "#312E81",
 
-  // === Violet ===
+  // Violet
   violet50: "#F5F3FF",
   violet100: "#EDE9FE",
   violet200: "#DDD6FE",
@@ -221,7 +221,7 @@ const colors = {
   violet800: "#5B21B6",
   violet900: "#4C1D95",
 
-  // === Purple ===
+  // Purple
   purple50: "#FAF5FF",
   purple100: "#F3E8FF",
   purple200: "#E9D5FF",
@@ -233,7 +233,7 @@ const colors = {
   purple800: "#6B21A8",
   purple900: "#581C87",
 
-  // === Fuchsia ===
+  // Fuchsia
   fuchsia50: "#FDF4FF",
   fuchsia100: "#FAE8FF",
   fuchsia200: "#F5D0FE",
@@ -245,7 +245,7 @@ const colors = {
   fuchsia800: "#86198F",
   fuchsia900: "#701A75",
 
-  // === Pink ===
+  // Pink
   pink50: "#FDF2F8",
   pink100: "#FCE7F3",
   pink200: "#FBCFE8",
@@ -257,7 +257,7 @@ const colors = {
   pink800: "#9D174D",
   pink900: "#831843",
 
-  // === Rose ===
+  // Rose
   rose50: "#FFF1F2",
   rose100: "#FFE4E6",
   rose200: "#FECDD3",
@@ -270,36 +270,25 @@ const colors = {
   rose900: "#881337",
 };
 
-// 🔧 Utilitas manipulasi warna
+// 🔧 Utilitas
 function adjustColor(hex, percent) {
   let num = parseInt(hex.replace("#", ""), 16);
   let r = (num >> 16) + percent;
   let g = ((num >> 8) & 0x00FF) + percent;
   let b = (num & 0x0000FF) + percent;
-
   r = Math.min(255, Math.max(0, r));
   g = Math.min(255, Math.max(0, g));
   b = Math.min(255, Math.max(0, b));
-
   return "#" + (b | (g << 8) | (r << 16)).toString(16).padStart(6, "0");
 }
 
-function lighten(hex, percent = 20) {
+export function lighten(hex, percent = 20) {
   return adjustColor(hex, percent);
 }
-
-function darken(hex, percent = 20) {
+export function darken(hex, percent = 20) {
   return adjustColor(hex, -percent);
 }
-
-function withOpacity(hex, opacity = 1) {
+export function withOpacity(hex, opacity = 1) {
   let alpha = Math.round(opacity * 255).toString(16).padStart(2, "0");
   return hex + alpha;
-}
-
-// 📦 CommonJS Export
-module.exports = { colors, lighten, darken, withOpacity };
-
-// 📦 ES Module Export (buat import modern)
-export { colors, lighten, darken, withOpacity };
-export default { colors, lighten, darken, withOpacity };
+  }
