@@ -1,3 +1,4 @@
+// Glaze/src/core/math/Color/BasicGlazeColor.js
 import { Color } from './Color.js';
 
 export const BasicColors = {
@@ -14,4 +15,12 @@ export const BasicColors = {
     purple: new Color(0x800080),
     pink: new Color(0xffc0cb),
     gray: new Color(0x808080),
+    lightGray: new Color(0xd3d3d3),
+    darkGray: new Color(0xa9a9a9),
+    lime: new Color(0x00ff00),
+    navy: new Color(0x000080),
+    teal: new Color(0x008080),
+    olive: new Color(0x808000),
+    maroon: new Color(0x800000),
+    silver: new Color(0xc0c0c0)
 };
