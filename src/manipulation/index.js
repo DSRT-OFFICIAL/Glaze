@@ -1,6 +1,6 @@
 // ==================== index.js ====================
+// Export semua fungsi manipulasi warna
 
-// Core color manipulation functions
 export * from "./lighten.js";
 export * from "./darken.js";
 export * from "./saturate.js";
