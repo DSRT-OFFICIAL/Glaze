@@ -2,9 +2,9 @@
   "name": "@glaze-artweb/glaze",
   "version": "1.0.0",
   "description": "Glaze - Color utilities for conversion, manipulation, accessibility, palettes, and themes.",
+  "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",
-  "type": "module",
   "files": [
     "src"
   ],
