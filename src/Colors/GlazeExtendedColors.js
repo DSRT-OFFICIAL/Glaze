@@ -1,4 +1,6 @@
-// ==================== EXTENDED ====================
+// ==================== GlazeExtendedColors.js ====================
+
+// Kumpulan warna extended (skala 50–900)
 export const GlazeExtendedColors = {
   fuchsia: {
     50: "#FDF4FF",
