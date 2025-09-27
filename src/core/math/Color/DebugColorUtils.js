@@ -1,37 +1,42 @@
-// DebugColorUtils.js
-// ❌ Tidak ada tag @public → tidak masuk index.js otomatis
+// debugAllColors.js
+import { ColorFactory, lerpColors, invertColor } from './FullColorFactory.js';
+import { BasicColors } from './BasicGlazeColor.js';
+import { ExtendedColors } from './ExtendedGlazeColors.js';
+import { CustomColors } from './CustomColors.js';
 
-import { Color } from './Color.js';
+const AllColors = { ...BasicColors, ...ExtendedColors, ...CustomColors };
 
-/**
- * Debug helper untuk keperluan internal development.
- * Tidak diexport ke publik karena tidak stabil.
- */
-
-/**
- * Convert Color ke string [r,g,b]
- */
-export function colorToArrayString(color) {
-    if (!(color instanceof Color)) return '[invalid color]';
-    return `[${color.r.toFixed(2)}, ${color.g.toFixed(2)}, ${color.b.toFixed(2)}]`;
+function rgbArray(color) {
+    return `[${(color.r*255).toFixed(0)}, ${(color.g*255).toFixed(0)}, ${(color.b*255).toFixed(0)}]`;
 }
 
-/**
- * Log warna ke console dengan format yang jelas
- */
-export function logColor(label, color) {
-    console.log(`${label}: ${colorToArrayString(color)}`);
+function hslArray(color) {
+    const { h, s, l } = color.getHSL ? color.getHSL() : { h: 0, s: 0, l: 0 };
+    return `[h:${(h*360).toFixed(0)}, s:${(s*100).toFixed(0)}%, l:${(l*100).toFixed(0)}%]`;
 }
 
-/**
- * Bandingkan dua warna dan print hasil
- */
-export function compareColors(c1, c2) {
-    if (!(c1 instanceof Color) || !(c2 instanceof Color)) {
-        console.warn('compareColors: invalid input');
-        return;
-    }
-    console.log(
-        `Compare: ${colorToArrayString(c1)} vs ${colorToArrayString(c2)}`
-    );
+console.log('===== DETAILED COLOR DEBUG =====');
+
+for (const key in AllColors) {
+    const color = AllColors[key];
+
+    const cfOriginal = ColorFactory(key);
+    const normalizedName = key.replace(/\s+/g, '').toLowerCase();
+    const cfNormalized = ColorFactory(normalizedName);
+
+    const clone = cfOriginal.clone();
+    const hex = cfOriginal.getHex ? cfOriginal.getHex() : 'N/A';
+    const lerpTest = lerpColors(cfOriginal, cfOriginal, 0.5);
+    const invTest = invertColor(cfOriginal);
+
+    console.log(`\n--- ${key} ---`);
+    console.log(`Normalized access: ${normalizedName}`);
+    console.log(`RGB: ${rgbArray(cfOriginal)}`);
+    console.log(`Hex: 0x${hex.toString(16).padStart(6,'0')}`);
+    console.log(`HSL: ${hslArray(cfOriginal)}`);
+    console.log(`Clone equal object? ${clone === cfOriginal ? 'FAIL' : 'OK'}`);
+    console.log(`Lerp test: ${lerpTest ? 'OK' : 'FAIL'}`);
+    console.log(`Invert test: ${invTest ? 'OK' : 'FAIL'}`);
 }
+
+console.log('===== COLOR DEBUG DONE =====');
