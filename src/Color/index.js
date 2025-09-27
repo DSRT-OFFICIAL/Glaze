@@ -1,5 +1,7 @@
 // ESM
-export { default as colors } from "./Colors-libs.esm.js";
+export * from "./Color/index.js";
 
 // CJS fallback
-export const colorsCJS = require("./Colors-libs.cjs.js");
+module.exports = {
+  colors: require("./Color/Colors-libs.cjs.js"),
+};
