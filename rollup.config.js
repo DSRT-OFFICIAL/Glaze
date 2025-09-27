@@ -1,48 +1,26 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import { terser } from 'rollup-plugin-terser';
-import dts from 'rollup-plugin-dts';
-
-const pkg = require('./package.json');
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
 
 export default [
-  // -----------------------------
-  // Build JS: ESM + CJS + UMD
-  // -----------------------------
+  // ESM
   {
-    input: 'src/index.js',
-    output: [
-      {
-        file: pkg.module, // ESM
-        format: 'esm',
-        sourcemap: true,
-      },
-      {
-        file: pkg.main, // CJS
-        format: 'cjs',
-        sourcemap: true,
-        exports: 'named',
-      },
-      {
-        file: 'dist/glaze.umd.js', // UMD
-        format: 'umd',
-        name: 'Glaze',
-        sourcemap: true,
-      },
-    ],
-    plugins: [
-      resolve(),
-      commonjs(),
-      terser(), // Minify
-    ],
+    input: "src/index.js",
+    output: {
+      file: "dist/glaze.esm.js",
+      format: "esm",
+      sourcemap: true
+    },
+    plugins: [resolve(), commonjs(), terser()]
   },
-
-  // -----------------------------
-  // Build TypeScript types
-  // -----------------------------
+  // CJS
   {
-    input: 'src/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'es' }],
-    plugins: [dts()],
-  },
+    input: "src/index.js",
+    output: {
+      file: "dist/glaze.cjs.js",
+      format: "cjs",
+      sourcemap: true
+    },
+    plugins: [resolve(), commonjs(), terser()]
+  }
 ];
