@@ -1,21 +1,42 @@
 {
   "name": "@glaze-artweb/glaze",
   "version": "1.0.0",
+  "description": "Glaze - Color utilities for conversion, manipulation, accessibility, palettes, and themes.",
   "main": "src/index.js",
   "module": "src/index.js",
   "type": "module",
   "files": [
     "src"
   ],
+  "keywords": [
+    "colors",
+    "palette",
+    "theme",
+    "glaze",
+    "utilities",
+    "design-system"
+  ],
   "scripts": {
-    "build": "echo 'Build step (skip, nothing to compile)'",
+    "build": "echo 'No build step required (pure ESM)'",
     "test": "jest --coverage",
+    "lint": "eslint src --ext .js",
     "release:patch": "npm version patch && git push origin main --tags",
     "release:minor": "npm version minor && git push origin main --tags",
     "release:major": "npm version major && git push origin main --tags"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DSRT-OFFICIAL/Glaze.git"
+  },
+  "author": "DSRT-OFFICIAL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DSRT-OFFICIAL/Glaze/issues"
+  },
+  "homepage": "https://github.com/DSRT-OFFICIAL/Glaze#readme",
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "eslint": "^9.11.1"
   },
   "jest": {
     "testEnvironment": "node",
