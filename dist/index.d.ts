@@ -1,99 +1,98 @@
-// ================= Core =================
+// ==================== CORE ====================
+
 export class Color {
-  constructor(value?: string | number | Color);
+  constructor(hex: string);
   r: number;
   g: number;
   b: number;
-  a: number;
-  hex(): string;
-  rgb(): { r: number; g: number; b: number };
-  hsl(): { h: number; s: number; l: number };
-  cmyk(): { c: number; m: number; y: number; k: number };
-  lab(): { l: number; a: number; b: number };
-  xyz(): { x: number; y: number; z: number };
-  hsv(): { h: number; s: number; v: number };
+  h: number;
+  s: number;
+  l: number;
+
   clone(): Color;
-  toString(format?: "hex" | "rgb" | "hsl"): string;
+  toHex(): string;
+  toRgb(): { r: number; g: number; b: number };
+  toHsl(): { h: number; s: number; l: number };
+  lighten(amount: number): Color;
+  darken(amount: number): Color;
+  saturate(amount: number): Color;
+  desaturate(amount: number): Color;
+  invert(): Color;
+  blend(other: Color, weight: number): Color;
+  mix(other: Color, weight: number): Color;
 }
 
 export class Palette {
-  constructor(colors?: string[] | Color[]);
+  constructor(colors: Color[] | string[]);
   colors: Color[];
   add(color: Color | string): void;
   remove(index: number): void;
   get(index: number): Color;
-  random(): Color;
+  shuffle(): void;
   clone(): Palette;
 }
 
-// ================= Utils =================
-export const Utils: {
-  clamp(value: number, min: number, max: number): number;
-  lerp(a: number, b: number, t: number): number;
-  random(min?: number, max?: number): number;
-  randomInt(min?: number, max?: number): number;
-};
+// ==================== UTILS ====================
+export namespace Utils {
+  function clamp(value: number, min: number, max: number): number;
+  function lerp(a: number, b: number, t: number): number;
+  function random(min?: number, max?: number): number;
+  function randomItem<T>(arr: T[]): T;
+}
 
-// ================= Conversion =================
-export function rgbToHex(r: number, g: number, b: number): string;
+// ==================== CONVERSIONS ====================
 export function hexToRgb(hex: string): { r: number; g: number; b: number };
+export function rgbToHex(r: number, g: number, b: number): string;
 export function hexToHsl(hex: string): { h: number; s: number; l: number };
 export function hslToHex(h: number, s: number, l: number): string;
-export function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number };
-export function hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: number };
-export function rgbToCmyk(r: number, g: number, b: number): { c: number; m: number; y: number; k: number };
-export function cmykToRgb(c: number, m: number, y: number, k: number): { r: number; g: number; b: number };
-export function rgbToLab(r: number, g: number, b: number): { l: number; a: number; b: number };
-export function labToRgb(l: number, a: number, b: number): { r: number; g: number; b: number };
-export function rgbToXyz(r: number, g: number, b: number): { x: number; y: number; z: number };
-export function xyzToRgb(x: number, y: number, z: number): { r: number; g: number; b: number };
-export function rgbToHsv(r: number, g: number, b: number): { h: number; s: number; v: number };
-export function hsvToRgb(h: number, s: number, v: number): { r: number; g: number; b: number };
+// Tambahkan cmyk, lab, xyz, hsv
+export function hexToCmyk(hex: string): { c: number; m: number; y: number; k: number };
+export function cmykToHex(c: number, m: number, y: number, k: number): string;
+export function hexToLab(hex: string): { l: number; a: number; b: number };
+export function labToHex(l: number, a: number, b: number): string;
+export function hexToXyz(hex: string): { x: number; y: number; z: number };
+export function xyzToHex(x: number, y: number, z: number): string;
+export function hexToHsv(hex: string): { h: number; s: number; v: number };
+export function hsvToHex(h: number, s: number, v: number): string;
 
-// ================= Manipulation =================
-export function lighten(color: Color | string, amount: number): Color;
-export function darken(color: Color | string, amount: number): Color;
-export function saturate(color: Color | string, amount: number): Color;
-export function desaturate(color: Color | string, amount: number): Color;
-export function blend(color1: Color | string, color2: Color | string, ratio: number): Color;
-export function mix(color1: Color | string, color2: Color | string, ratio: number): Color;
-export function invert(color: Color | string): Color;
+// ==================== MANIPULATION ====================
+export function lighten(color: string | Color, amount: number): Color;
+export function darken(color: string | Color, amount: number): Color;
+export function saturate(color: string | Color, amount: number): Color;
+export function desaturate(color: string | Color, amount: number): Color;
+export function invert(color: string | Color): Color;
+export function blend(color1: string | Color, color2: string | Color, weight: number): Color;
+export function mix(color1: string | Color, color2: string | Color, weight: number): Color;
 
-// ================= Accessibility =================
-export function contrast(color1: Color | string, color2: Color | string): number;
-export function readability(color1: Color | string, color2: Color | string): "AAA" | "AA" | "Fail";
-export function blindFriendly(color: Color | string): string;
+// ==================== ACCESSIBILITY ====================
+export function contrast(color1: string | Color, color2: string | Color): number;
+export function readability(color1: string | Color, color2: string | Color): "AAA" | "AA" | "Fail";
+export function blindFriendly(color: string | Color): string;
 
-// ================= Gradients =================
-export function linearGradient(colors: string[] | Color[], direction?: string): string;
-export function radialGradient(colors: string[] | Color[], shape?: "circle" | "ellipse"): string;
-export function conicGradient(colors: string[] | Color[], startAngle?: string): string;
-
-// ================= Palettes =================
+// ==================== PALETTES ====================
 export const GlazeBasicColors: Record<string, string | Record<number, string>>;
-export const GlazeExtendedColors: Record<string, string | Record<number, string>>;
-export const GlazeVariantsColors: Record<string, string | Record<number, string>>;
-export const userPalettes: Record<string, string[]>;
+export const GlazeExtendedColors: Record<string, Record<number, string>>;
+export const GlazeVariantsColors: Record<string, Record<number, string>>;
 
-// ================= Random =================
+// ==================== RANDOM ====================
 export function randomColor(): Color;
-export function randomPalette(size?: number): Palette;
-export function randomGradient(size?: number): string;
+export function randomPalette(count?: number): Palette;
+export function randomGradient(): string;
 
-// ================= Effects =================
-export function noise(color: Color | string, intensity?: number): Color;
-export function grain(color: Color | string, intensity?: number): Color;
-export function glow(color: Color | string, radius?: number): Color;
-export function overlay(base: Color | string, overlayColor: Color | string, alpha?: number): Color;
+// ==================== EFFECTS ====================
+export function noise(color: string | Color, intensity?: number): Color;
+export function grain(color: string | Color, intensity?: number): Color;
+export function glow(color: string | Color, intensity?: number): Color;
+export function overlay(base: string | Color, overlay: string | Color, opacity: number): Color;
 
-// ================= Analysis =================
-export function temperature(color: Color | string): "warm" | "cool" | "neutral";
-export function harmony(color: Color | string, type: "complementary" | "analogous" | "triadic" | "tetradic"): Color[];
-export function dominant(colors: (Color | string)[]): Color;
-export function contrastMap(colors: (Color | string)[]): number[][];
+// ==================== ANALYSIS ====================
+export function temperature(color: string | Color): "warm" | "cool" | "neutral";
+export function harmony(color: string | Color, type: "complementary" | "analogous" | "triadic" | "tetradic"): Color[];
+export function dominant(colors: (string | Color)[]): Color;
+export function contrastMap(colors: (string | Color)[]): number[][];
 
-// ================= IO =================
-export function hexIOExport(color: Color | string): string;
-export function cssExport(color: Color | string): string;
-export function jsonExport(colors: (Color | string)[]): string;
-export function svgExport(color: Color | string, width?: number, height?: number): string;
+// ==================== IO ====================
+export function exportHex(color: string | Color): string;
+export function exportCss(color: string | Color): string;
+export function exportJson(palette: Palette): string;
+export function exportSvg(color: string | Color, size?: number): string;
