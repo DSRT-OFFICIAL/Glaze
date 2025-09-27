@@ -1,78 +1,72 @@
 // Glaze/src/core/math/Color/testColors.js
-import { ColorFactory, lerpColors, mixColors, addColors, multiplyColors, invertColor, ColorShortcut } from './FullColorFactory.js';
-import { Color } from './Color.js';
+import { BasicColors } from './BasicGlazeColor.js';
+import { ExtendedColors } from './ExtendedGlazeColors.js';
+import { CustomColors } from './CustomColors.js';
+import { ColorFactory, lerpColors, mixColors, addColors, multiplyColors, invertColor } from './FullColorFactory.js';
+import { logColor, compareColors, debugAllColors, debugFactory } from './DebugColorUtils.js';
 
-// ==============================
-// Daftar warna uji
-// ==============================
-const testColorNames = [
-    'black', 'white', 'red', 'green', 'blue',
-    'cyan', 'magenta', 'yellow', 'orange', 'brown',
-    'purple', 'pink', 'gray', 'aliceBlue', 'antiqueWhite',
-    'deepPink', 'royalBlue', 'customColor1' // pastikan CustomColors ada
+// -------------------------
+// Test Basic Colors
+// -------------------------
+console.log('--- Basic Colors ---');
+debugAllColors(BasicColors);
+
+// -------------------------
+// Test Extended Colors
+// -------------------------
+console.log('--- Extended Colors ---');
+debugAllColors(ExtendedColors);
+
+// -------------------------
+// Test Custom Colors
+// -------------------------
+console.log('--- Custom Colors ---');
+debugAllColors(CustomColors);
+
+// -------------------------
+// Test ColorFactory dengan string dan hex
+// -------------------------
+console.log('--- ColorFactory Tests ---');
+const testInputs = [
+    'red',
+    'Blue',
+    ' royalblue ',  // spasi ekstra
+    '#0f0',         // shorthand hex
+    '#00ff00',      // hex panjang
+    0xff00ff,       // angka
+    'nonexistent'   // invalid
 ];
 
-// ==============================
-// Test Factory & Shortcut
-// ==============================
-console.log('=== Test ColorFactory & ColorShortcut ===');
-for (const name of testColorNames) {
-    const c1 = ColorFactory(name);
-    const c2 = ColorShortcut(name);
-    console.log(`${name}:`, c1.toString(), '| shortcut:', c2.toString());
-}
+debugFactory(testInputs);
 
-// ==============================
-// Test HEX input
-// ==============================
-console.log('\n=== Test Hex input ===');
-const hexColors = ['#f00', '#00ff00', '#0000ff', '#abcdef'];
-hexColors.forEach(hex => {
-    const c = ColorFactory(hex);
-    console.log(`${hex}:`, c.toString(), '| hexValue:', c.getHex().toString(16));
-});
+// -------------------------
+// Test operations
+// -------------------------
+console.log('--- Color Operations ---');
+const c1 = ColorFactory('red');
+const c2 = ColorFactory('blue');
 
-// ==============================
-// Test lerp/mix/add/multiply/invert
-// ==============================
-console.log('\n=== Test Utility Functions ===');
+logColor('c1', c1);
+logColor('c2', c2);
 
-const cA = ColorFactory('red');
-const cB = ColorFactory('blue');
+const cLerp = lerpColors(c1, c2, 0.5);
+logColor('lerp c1->c2 (0.5)', cLerp);
 
-const lerpAB = lerpColors(cA, cB, 0.5);
-const mixAB = mixColors(cA, cB, 0.3);
-const addAB = addColors(cA, cB);
-const mulAB = multiplyColors(cA, cB);
-const invA = invertColor(cA);
+const cMix = mixColors(c1, c2, 0.25);
+logColor('mix c1->c2 (0.25)', cMix);
 
-console.log('lerpColors(red,blue,0.5):', lerpAB.toString());
-console.log('mixColors(red,blue,0.3):', mixAB.toString());
-console.log('addColors(red,blue):', addAB.toString());
-console.log('multiplyColors(red,blue):', mulAB.toString());
-console.log('invertColor(red):', invA.toString());
+const cAdd = addColors(c1, c2);
+logColor('add c1+c2', cAdd);
 
-// ==============================
-// Test clone & copy
-// ==============================
-console.log('\n=== Test clone & copy ===');
-const original = ColorFactory('green');
-const cloned = original.clone();
-const copyTarget = new Color();
-copyTarget.copy(original);
+const cMul = multiplyColors(c1, c2);
+logColor('multiply c1*c2', cMul);
 
-console.log('original:', original.toString());
-console.log('cloned:', cloned.toString());
-console.log('copyTarget:', copyTarget.toString());
+const cInv = invertColor(c1);
+logColor('invert c1', cInv);
 
-// ==============================
-// Test invalid input
-// ==============================
-console.log('\n=== Test invalid input ===');
-const invalidInputs = ['unknownColor', '#xyz', 999999999, null, {}];
-invalidInputs.forEach(input => {
-    const c = ColorFactory(input);
-    console.log(`input: ${input}`, '=>', c.toString());
-});
-
-console.log('\n=== Test Complete ===');
+// -------------------------
+// Test compareColors
+// -------------------------
+console.log('--- Compare Colors ---');
+compareColors(c1, c2);
+compareColors(c1, ColorFactory('red'));
