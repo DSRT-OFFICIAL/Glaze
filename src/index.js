@@ -1,5 +1,3 @@
-// ==================== Glaze Master Index ====================
-
 // Core
 export * from "./core/index.js";
 
