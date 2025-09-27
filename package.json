@@ -1,12 +1,19 @@
-
 {
   "name": "glaze",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "description": "Universal color library (ESM + CJS) by DSRT-OFFICIAL",
+  "main": "./src/index.js",
+  "module": "./src/Color/Colors-libs.esm.js",
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./src/index.js"
+    }
+  },
   "type": "module",
-  "description": "Glaze 3D Engine Library",
-  "keywords": ["3D", "WebGL", "Engine", "Glaze"],
-  "author": "dsrt",
+  "files": [
+    "src"
+  ],
+  "author": "DSRT-OFFICIAL",
   "license": "MIT"
 }
