@@ -1,3 +1,4 @@
+// Glaze/src/core/math/Color/ExtendedGlazeColors.js
 import { Color } from './Color.js';
 import { BasicColors } from './BasicGlazeColor.js';
 
@@ -5,7 +6,6 @@ export const ExtendedColors = {
     ...BasicColors,
     aliceBlue: new Color(0xf0f8ff),
     antiqueWhite: new Color(0xfaebd7),
-    aqua: new Color(0x00ffff),
     aquamarine: new Color(0x7fffd4),
     azure: new Color(0xf0ffff),
     beige: new Color(0xf5f5dc),
@@ -21,7 +21,6 @@ export const ExtendedColors = {
     darkBlue: new Color(0x00008b),
     darkCyan: new Color(0x008b8b),
     darkGoldenRod: new Color(0xb8860b),
-    darkGray: new Color(0xa9a9a9),
     darkGreen: new Color(0x006400),
     darkKhaki: new Color(0xbdb76b),
     darkMagenta: new Color(0x8b008b),
@@ -42,7 +41,6 @@ export const ExtendedColors = {
     fireBrick: new Color(0xb22222),
     floralWhite: new Color(0xfffaf0),
     forestGreen: new Color(0x228b22),
-    fuchsia: new Color(0xff00ff),
     gainsboro: new Color(0xdcdcdc),
     ghostWhite: new Color(0xf8f8ff),
     gold: new Color(0xffd700),
@@ -62,7 +60,6 @@ export const ExtendedColors = {
     lightCoral: new Color(0xf08080),
     lightCyan: new Color(0xe0ffff),
     lightGoldenRodYellow: new Color(0xfafad2),
-    lightGray: new Color(0xd3d3d3),
     lightGreen: new Color(0x90ee90),
     lightPink: new Color(0xffb6c1),
     lightSalmon: new Color(0xffa07a),
@@ -71,11 +68,8 @@ export const ExtendedColors = {
     lightSlateGray: new Color(0x778899),
     lightSteelBlue: new Color(0xb0c4de),
     lightYellow: new Color(0xffffe0),
-    lime: new Color(0x00ff00),
     limeGreen: new Color(0x32cd32),
     linen: new Color(0xfaf0e6),
-    magenta: new Color(0xff00ff),
-    maroon: new Color(0x800000),
     mediumAquaMarine: new Color(0x66cdaa),
     mediumBlue: new Color(0x0000cd),
     mediumOrchid: new Color(0xba55d3),
@@ -90,7 +84,6 @@ export const ExtendedColors = {
     mistyRose: new Color(0xffe4e1),
     moccasin: new Color(0xffe4b5),
     navajoWhite: new Color(0xffdead),
-    navy: new Color(0x000080),
     oldLace: new Color(0xfdf5e6),
     oliveDrab: new Color(0x6b8e23),
     orangeRed: new Color(0xff4500),
@@ -102,7 +95,6 @@ export const ExtendedColors = {
     papayaWhip: new Color(0xffefd5),
     peachPuff: new Color(0xffdab9),
     peru: new Color(0xcd853f),
-    pink: new Color(0xffc0cb),
     plum: new Color(0xdda0dd),
     powderBlue: new Color(0xb0e0e6),
     rosyBrown: new Color(0xbc8f8f),
@@ -113,7 +105,6 @@ export const ExtendedColors = {
     seaGreen: new Color(0x2e8b57),
     seaShell: new Color(0xfff5ee),
     sienna: new Color(0xa0522d),
-    silver: new Color(0xc0c0c0),
     skyBlue: new Color(0x87ceeb),
     slateBlue: new Color(0x6a5acd),
     slateGray: new Color(0x708090),
@@ -128,5 +119,5 @@ export const ExtendedColors = {
     violet: new Color(0xee82ee),
     wheat: new Color(0xf5deb3),
     whiteSmoke: new Color(0xf5f5f5),
-    yellowGreen: new Color(0x9acd32),
+    yellowGreen: new Color(0x9acd32)
 };
