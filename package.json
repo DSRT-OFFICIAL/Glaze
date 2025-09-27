@@ -1,8 +1,11 @@
 {
   "name": "@dsrtstudio/glaze",
-  "version": "1.0.0",
+  "type": "module",
   "main": "dist/glaze.cjs.js",
   "module": "dist/glaze.esm.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepare": "husky install",
     "build": "rollup -c",
@@ -32,5 +35,13 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DSRT-OFFICIAL/Glaze.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DSRT-OFFICIAL/Glaze/issues"
+  },
+  "homepage": "https://github.com/DSRT-OFFICIAL/Glaze#readme"
 }
