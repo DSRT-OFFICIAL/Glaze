@@ -1,71 +1,141 @@
 # Glaze
 
-Glaze is a color utility library for:
+**Glaze** is a modern, modular, and professional JavaScript color utility library. Inspired by the flexibility of libraries like Three.js, Glaze provides everything you need to create, manipulate, convert, and analyze colors, palettes, and gradients.
 
-Color conversion (HEX ↔ RGB/HSL)
+---
 
-Color manipulation (lighten, darken, opacity, mix)
+## Features
 
-Palettes and themes (shades, tints, complementary, triadic)
+- **Core Classes**
+  - `Color`: Class for handling color objects and transformations.
+  - `Palette`: Manage and manipulate color palettes easily.
+  - `Utils`: General helpers (clamp, lerp, random, etc.).
 
-Color accessibility (contrast, WCAG compliance)
+- **Color Conversions**
+  - HEX, RGB, HSL, CMYK, LAB, XYZ, HSV
+  - Bidirectional conversion functions for professional color workflows.
 
-Random color & palette generation
+- **Manipulation**
+  - Lighten, Darken, Saturate, Desaturate, Blend, Mix, Invert
+  - Powerful, modular utilities to adjust colors dynamically.
+
+- **Accessibility**
+  - Contrast calculations, readability checks, and color blindness-friendly palettes.
+
+- **Gradients**
+  - Linear, Radial, Conic
+  - Generate gradients programmatically or blend existing palettes.
+
+- **Palettes**
+  - `GlazeBasicColors`, `GlazeExtendedColors`, `GlazeVariantsColors`
+  - Support for user-defined palettes.
+
+- **Randomization**
+  - Random colors, random palettes, and gradient generation.
+
+- **Effects**
+  - Noise, Grain, Glow, Overlay
+  - Procedural effects for creative color generation.
+
+- **Analysis (Pro Features)**
+  - Color temperature detection (warm/cool)
+  - Harmony analysis (complementary, analogous, triadic, tetradic)
+  - Dominant color extraction
+  - Automatic contrast mapping
+
+- **IO**
+  - Import/export colors in HEX, CSS, JSON, and SVG.
+
+---
+
+## Installation
+
+```bash
+npm install glaze
+
+or via CDN:
+
+<script src="https://cdn.jsdelivr.net/npm/glaze/dist/glaze.min.js"></script>
 
 
-Install
-
-npm install @glaze-artweb/glaze
+---
 
 Usage
 
-import { getColor, Theme } from "@glaze-artweb/glaze";
+import { Color, Palette, GlazeBasicColors } from "glaze";
 
-const primary500 = getColor("primary", 500);
-console.log(primary500);
+// Create a new color
+const red = new Color("#FF0000");
 
-console.log(Theme.LightTheme.primary.DEFAULT);
+// Lighten a color
+const lightRed = red.lighten(20);
 
+// Convert color to HSL
+const hsl = red.toHSL();
 
----
+// Create a palette
+const palette = new Palette([GlazeBasicColors.red[500], GlazeBasicColors.blue[500]]);
+palette.addColor("#00FF00");
 
-5. Publishing to NPM
-
-1. Make sure the version in package.json is correct (e.g., 1.0.0).
-
-
-2. First-time publish:
-
-
-
-npm publish --access public
-
-3. For subsequent updates (patch/minor/major):
-
-
-
-npm version patch   # or minor/major
-npm publish
-
-> Note: --access public is required for scoped packages (@glaze-artweb/glaze) to be publicly accessible.
-
-
+// Generate random color
+import { randomColor } from "glaze/random";
+const random = randomColor();
 
 
 ---
 
-6. Importing in Other Projects
+File Structure
 
-ESM (default for Glaze):
+Glaze/
+ └── src/
+     ├── core/
+     ├── conversion/
+     ├── manipulation/
+     ├── accessibility/
+     ├── gradients/
+     ├── palettes/
+     ├── random/
+     ├── effects/
+     ├── analysis/
+     ├── io/
+     └── index.js
 
 
-import { getColor, Theme } from "@glaze-artweb/glaze";
+---
 
-Browser via CDN (optional)
-If you want to use it like Three.js via <script> CDN, you can use unpkg:
+Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
 
 
-<script type="module">
-import { getColor } from 'https://unpkg.com/@glaze-artweb/glaze@1.0.0/src/index.js';
-console.log(getColor("primary", 500));
-</script>
+2. Create a new branch (git checkout -b feature-name)
+
+
+3. Commit your changes (git commit -m 'Add new feature')
+
+
+4. Push to the branch (git push origin feature-name)
+
+
+5. Open a Pull Request
+
+
+
+
+---
+
+License
+
+MIT License © 2025 Glaze Library.
+See LICENSE for details.
+
+
+---
+
+Contact
+
+GitHub: DSRT-OFFICIAL/Glaze
+
+Email: fengbayu@gmail.com
