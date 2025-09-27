@@ -1,63 +1,48 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import { terser } from "rollup-plugin-terser";
-import pkg from "./package.json";
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import { terser } from 'rollup-plugin-terser';
+import dts from 'rollup-plugin-dts';
 
-const banner = `/*!
- * Glaze.js v${pkg.version}
- * Pro-level Color Library inspired by Three.js
- * (c) 2025 Glaze Library
- * Released under MIT License
- */`;
+const pkg = require('./package.json');
 
 export default [
-  // ESM Build
+  // -----------------------------
+  // Build JS: ESM + CJS + UMD
+  // -----------------------------
   {
-    input: "src/index.js",
-    output: {
-      file: pkg.module,
-      format: "esm",
-      sourcemap: true,
-      banner,
-    },
+    input: 'src/index.js',
+    output: [
+      {
+        file: pkg.module, // ESM
+        format: 'esm',
+        sourcemap: true,
+      },
+      {
+        file: pkg.main, // CJS
+        format: 'cjs',
+        sourcemap: true,
+        exports: 'named',
+      },
+      {
+        file: 'dist/glaze.umd.js', // UMD
+        format: 'umd',
+        name: 'Glaze',
+        sourcemap: true,
+      },
+    ],
     plugins: [
       resolve(),
       commonjs(),
-      terser()
-    ]
+      terser(), // Minify
+    ],
   },
 
-  // CJS Build
+  // -----------------------------
+  // Build TypeScript types
+  // -----------------------------
   {
-    input: "src/index.js",
-    output: {
-      file: pkg.main,
-      format: "cjs",
-      sourcemap: true,
-      banner,
-      exports: "named"
-    },
-    plugins: [
-      resolve(),
-      commonjs(),
-      terser()
-    ]
+    input: 'src/index.d.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'es' }],
+    plugins: [dts()],
   },
-
-  // UMD Build (browser global)
-  {
-    input: "src/index.js",
-    output: {
-      file: "dist/glaze.umd.js",
-      format: "umd",
-      name: "Glaze",
-      sourcemap: true,
-      banner
-    },
-    plugins: [
-      resolve(),
-      commonjs(),
-      terser()
-    ]
-  }
 ];
