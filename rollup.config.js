@@ -1,57 +1,63 @@
-// rollup.config.js
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import { terser } from 'rollup-plugin-terser';
-import { babel } from '@rollup/plugin-babel';
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
+import pkg from "./package.json";
 
-const INPUT = 'src/index.js';
-const OUTPUT_DIR = 'dist';
+const banner = `/*!
+ * Glaze.js v${pkg.version}
+ * Pro-level Color Library inspired by Three.js
+ * (c) 2025 Glaze Library
+ * Released under MIT License
+ */`;
 
 export default [
-  // ESM build
+  // ESM Build
   {
-    input: INPUT,
+    input: "src/index.js",
     output: {
-      file: `${OUTPUT_DIR}/glaze.esm.js`,
-      format: 'esm',
+      file: pkg.module,
+      format: "esm",
       sourcemap: true,
+      banner,
     },
     plugins: [
       resolve(),
       commonjs(),
-      terser(),
-      babel({ babelHelpers: 'bundled', exclude: 'node_modules/**' }),
-    ],
+      terser()
+    ]
   },
-  // CJS build
+
+  // CJS Build
   {
-    input: INPUT,
+    input: "src/index.js",
     output: {
-      file: `${OUTPUT_DIR}/glaze.cjs.js`,
-      format: 'cjs',
+      file: pkg.main,
+      format: "cjs",
       sourcemap: true,
+      banner,
+      exports: "named"
     },
     plugins: [
       resolve(),
       commonjs(),
-      terser(),
-      babel({ babelHelpers: 'bundled', exclude: 'node_modules/**' }),
-    ],
+      terser()
+    ]
   },
-  // UMD build for browser
+
+  // UMD Build (browser global)
   {
-    input: INPUT,
+    input: "src/index.js",
     output: {
-      file: `${OUTPUT_DIR}/glaze.umd.js`,
-      format: 'umd',
-      name: 'Glaze',
+      file: "dist/glaze.umd.js",
+      format: "umd",
+      name: "Glaze",
       sourcemap: true,
+      banner
     },
     plugins: [
       resolve(),
       commonjs(),
-      terser(),
-      babel({ babelHelpers: 'bundled', exclude: 'node_modules/**' }),
-    ],
-  },
+      terser()
+    ]
+  }
 ];
