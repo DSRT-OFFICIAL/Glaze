@@ -9,13 +9,16 @@
   "scripts": {
     "prepare": "husky install",
     "build": "rollup -c",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "lint": "eslint .",
+    "commit": "cz"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^3.29.5",
+
     "semantic-release": "^21.0.0",
     "@semantic-release/changelog": "^6.0.0",
     "@semantic-release/git": "^10.0.0",
@@ -23,15 +26,26 @@
     "@semantic-release/github": "^9.0.0",
     "@semantic-release/commit-analyzer": "^10.0.0",
     "@semantic-release/release-notes-generator": "^11.0.0",
+
     "husky": "^8.0.0",
+    "lint-staged": "^14.0.0",
+
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
-    "lint-staged": "^14.0.0",
-    "eslint": "^8.0.0"
+
+    "eslint": "^8.0.0",
+
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0"
   },
   "lint-staged": {
     "*.js": "eslint --fix",
     "*.ts": "eslint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "publishConfig": {
     "access": "public"
