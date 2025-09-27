@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Glaze Editable CSS Variable Builder</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  h1 { margin-bottom: 20px; }
+  .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .palette { display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+  .swatch {
+    width: 60px; height: 60px; border-radius: 6px; border: 1px solid #ccc;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #fff; font-weight: bold;
+    cursor: grab; flex-direction: column;
+  }
+  .css-vars { margin-top: 20px; padding: 10px; border: 1px solid #ccc; min-height: 150px; background: #f9f9f9; font-family: monospace; white-space: pre; }
+  .target { width: 200px; height: 200px; border: 2px dashed #aaa; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px; font-weight: bold; }
+  .var-name { font-size: 12px; margin-top: 2px; cursor: pointer; background: rgba(255,255,255,0.3); padding: 2px 4px; border-radius: 2px; }
+  input[type=color] { border: none; width: 100%; height: 20px; padding: 0; margin-top: 2px; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>🎨 Glaze Editable CSS Variable Builder</h1>
+
+<div class="controls">
+  <label>Base Color: <input type="color" id="baseColor" value="#3B82F6"></label>
+  <label>Palette Type:
+    <select id="paletteType">
+      <option value="shades">Shades</option>
+      <option value="tints">Tints</option>
+      <option value="complementary">Complementary</option>
+      <option value="splitComplementary">Split Complementary</option>
+      <option value="analogous">Analogous</option>
+      <option value="triadic">Triadic</option>
+      <option value="monochromatic">Monochromatic</option>
+    </select>
+  </label>
+  <button id="generateBtn">Generate</button>
+</div>
+
+<div id="paletteContainer" class="palette"></div>
+
+<div class="target" id="dropTarget">Drop Color Here</div>
+
+<h3>CSS Variables Preview</h3>
+<div id="cssPreview" class="css-vars">:root {\n}</div>
+
+<script type="module">
+import {
+  generateShades,
+  generateTints,
+  generateComplementary,
+  generateSplitComplementary,
+  generateAnalogous,
+  generateTriadic,
+  generateMonochromatic,
+} from "../src/Colors/PaletteUtils.js";
+
+const baseColorInput = document.getElementById("baseColor");
+const paletteTypeSelect = document.getElementById("paletteType");
+const generateBtn = document.getElementById("generateBtn");
+const container = document.getElementById("paletteContainer");
+const dropTarget = document.getElementById("dropTarget");
+const cssPreview = document.getElementById("cssPreview");
+
+let currentPalette = [];
+let cssVars = {};
+
+function renderPalette(colors) {
+  currentPalette = colors;
+  container.innerHTML = "";
+  colors.forEach((color, idx) => {
+    const swatch = document.createElement("div");
+    swatch.className = "swatch";
+    swatch.style.background = color;
+
+    const varNameDiv = document.createElement("div");
+    varNameDiv.className = "var-name";
+    varNameDiv.textContent = `--color-${paletteTypeSelect.value}-${idx}`;
+    swatch.appendChild(varNameDiv);
+
+    const colorInput = document.createElement("input");
+    colorInput.type = "color";
+    colorInput.value = color;
+    colorInput.addEventListener("input", (e) => {
+      swatch.style.background = e.target.value;
+      const name = varNameDiv.textContent;
+      cssVars[name] = e.target.value;
+      updateCSSPreview();
+    });
+    swatch.appendChild(colorInput);
+
+    swatch.setAttribute("draggable", true);
+
+    swatch.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", colorInput.value);
+      e.dataTransfer.setData("text/index", idx);
+    });
+
+    container.appendChild(swatch);
+  });
+}
+
+function generatePalette() {
+  const base = baseColorInput.value;
+  const type = paletteTypeSelect.value;
+  let colors = [];
+
+  switch(type) {
+    case "shades": colors = generateShades(base, 5); break;
+    case "tints": colors = generateTints(base, 5); break;
+    case "complementary": colors = generateComplementary(base); break;
+    case "splitComplementary": colors = generateSplitComplementary(base); break;
+    case "analogous": colors = generateAnalogous(base); break;
+    case "triadic": colors = generateTriadic(base); break;
+    case "monochromatic": colors = generateMonochromatic(base, 5); break;
+  }
+
+  renderPalette(colors);
+}
+
+// Drag & Drop target
+dropTarget.addEventListener("dragover", e => e.preventDefault());
+dropTarget.addEventListener("drop", e => {
+  e.preventDefault();
+  const color = e.dataTransfer.getData("text/plain");
+  const index = e.dataTransfer.getData("text/index");
+  dropTarget.style.background = color;
+  dropTarget.textContent = color;
+
+  const varName = `--color-${paletteTypeSelect.value}-${index}`;
+  cssVars[varName] = color;
+  updateCSSPreview();
+});
+
+// Rename variable on click
+container.addEventListener("click", e => {
+  if (e.target.classList.contains("var-name")) {
+    const oldName = e.target.textContent;
+    const newName = prompt("Rename CSS variable:", oldName);
+    if (newName) {
+      e.target.textContent = newName;
+      if (cssVars[oldName]) {
+        cssVars[newName] = cssVars[oldName];
+        delete cssVars[oldName];
+        updateCSSPreview();
+      }
+    }
+  }
+});
+
+function updateCSSPreview() {
+  let cssText = ":root {\n";
+  Object.keys(cssVars).forEach(key => {
+    cssText += `  ${key}: ${cssVars[key]};\n`;
+  });
+  cssText += "}";
+  cssPreview.textContent = cssText;
+}
+
+generateBtn.addEventListener("click", generatePalette);
+
+// Generate default on load
+generatePalette();
+</script>
+</body>
+</html>
