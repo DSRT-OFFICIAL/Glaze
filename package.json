@@ -5,19 +5,16 @@
   "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",
-  "files": [
-    "src"
-  ],
-  "keywords": [
-    "colors",
-    "palette",
-    "theme",
-    "glaze",
-    "utilities",
-    "design-system"
-  ],
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    }
+  },
+  "files": ["src"],
+  "keywords": ["colors", "palette", "theme", "glaze", "utilities", "design-system"],
   "scripts": {
-    "build": "echo 'No build step required (pure ESM)'",
+    "build": "echo 'Pure ESM - no build required'",
     "test": "jest --coverage",
     "lint": "eslint src --ext .js",
     "release:patch": "npm version patch && git push origin main --tags",
@@ -40,9 +37,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.js"],
     "coverageReporters": ["text", "lcov"]
   }
 }
