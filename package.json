@@ -1,5 +1,5 @@
 {
-  "name": "glaze",
+  "name": "@dsrtstudio/glaze",
   "version": "1.0.0",
   "main": "dist/glaze.cjs.js",
   "module": "dist/glaze.esm.js",
@@ -29,5 +29,8 @@
   "lint-staged": {
     "*.js": "eslint --fix",
     "*.ts": "eslint --fix"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
