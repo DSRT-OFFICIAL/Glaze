@@ -1,11 +1,16 @@
 // ==================== index.js ====================
-// Entry point untuk Glaze Colors: import semua modul dari satu file
+// Entry point utama Glaze Library
 
+// Warna dasar, extended, variant
 export { GlazeBasicColors } from "./GlazeBasicColors.js";
 export { GlazeExtendedColors } from "./GlazeExtendedColors.js";
 export { GlazeVariantsColors } from "./GlazeVariantsColors.js";
 
-export { GlazeNamedColors, GlazeNamedGradients } from "./GlazeNamedColors.js";
+// Warna lengkap dengan semua format
+export { GlazeNamedColors } from "./GlazeNamedColors.js";
 
+// Gradients preset
+export { GlazeGradients } from "./GlazeGradients.js";
+
+// Semua helper / util
 export * as GlazeUtils from "./GlazeUtils.js";
-export { GlazeGradients, generateGradient } from "./GlazeGradients.js";
