@@ -1,9 +1,7 @@
 // ==================== index.js ====================
-// Entry point Glaze: re-export semua dari GlazeAll
-
 import { GlazeAll } from "./GlazeAll.js";
 
-// Export all modules via GlazeAll
+// Export semua modul via GlazeAll
 export const {
   GlazeNamedColors,
   GlazeNamedGradients,
