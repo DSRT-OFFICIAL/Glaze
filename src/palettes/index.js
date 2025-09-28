@@ -1,11 +1,19 @@
 // ==================== index.js ====================
+// Entry point Glaze: re-export semua dari GlazeAll
 
-// Modular exports
-export { GlazeBasicColors } from "./GlazeBasicColors.js";
-export { GlazeExtendedColors } from "./GlazeExtendedColors.js";
-export { GlazeVariantsColors } from "./GlazeVariantsColors.js";
-export { GlazeNamedColors } from "./GlazeNamedColors.js";
-export { GlazeGradients, generateGradient } from "./GlazeGradients.js";
+import { GlazeAll } from "./GlazeAll.js";
 
-// All-in-one export
-export * as GlazeAll from "./GlazeAll.js";
+// Export all modules via GlazeAll
+export const {
+  GlazeNamedColors,
+  GlazeNamedGradients,
+  GlazeGradients,
+  GlazePalettes,
+  GlazeThemes,
+  GlazeAccessibility,
+  GlazeUtils,
+  generateGradient
+} = GlazeAll;
+
+// Default export
+export default GlazeAll;
