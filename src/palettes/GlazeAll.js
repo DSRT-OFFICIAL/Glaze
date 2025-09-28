@@ -1,68 +1,66 @@
 // ==================== GlazeAll.js ====================
-// All-in-one: Colors + Gradients + Utils + auto TypeScript .d.ts
+// All-in-one Glaze bundle: Colors + Palettes + Themes + Accessibility + Utils + Gradients
 
-import { GlazeBasicColors } from "./GlazeBasicColors.js";
-import { GlazeExtendedColors } from "./GlazeExtendedColors.js";
-import { GlazeVariantsColors } from "./GlazeVariantsColors.js";
-import { GlazeGradients, generateGradient } from "./GlazeGradients.js";
+import { GlazeExpertColors } from "./GlazeExpertColors.js";
+import { GlazePalettes } from "./GlazePalettes.js";
+import { GlazeThemes } from "./GlazeThemes.js";
+import * as GlazeAccessibility from "./GlazeAccessibility.js";
 import * as GlazeUtils from "./GlazeUtils.js";
+import { GlazeGradients, generateGradient } from "./GlazeGradients.js";
 
-// ===== Merge semua warna =====
+// ===== Merge semua warna dari GlazeExpertColors =====
 function mergeColorSets(...sets) {
   const merged = {};
   for (const set of sets) {
-    for (const [color, shades] of Object.entries(set)) {
-      if (typeof shades === "string") {
-        merged[color] = shades;
-      } else {
-        for (const [shade, hex] of Object.entries(shades)) {
-          merged[`${color}${shade}`] = hex;
-        }
-      }
+    for (const [color, hex] of Object.entries(set)) {
+      merged[color] = hex;
     }
   }
   return merged;
 }
 
-const allHexColors = mergeColorSets(
-  GlazeBasicColors,
-  GlazeExtendedColors,
-  GlazeVariantsColors
-);
+const allHexColors = mergeColorSets(GlazeExpertColors);
 
 // ===== Generate semua format warna =====
 export const GlazeNamedColors = {};
 for (const [name, hex] of Object.entries(allHexColors)) {
-  const rgb = GlazeUtils.hexToRGB(hex);
+  const rgb = GlazeUtils.hexToRgb(hex);
   GlazeNamedColors[name] = {
     hex,
     rgb,
-    rgba: GlazeUtils.rgbToRGBA(rgb),
-    rgbaString: GlazeUtils.rgbToRGBAString(rgb),
-    rgbFloat: GlazeUtils.rgbToFloat(rgb),
-    hsv: GlazeUtils.rgbToHSV(rgb),
-    hsl: GlazeUtils.rgbToHSL(rgb),
-    cmyk: GlazeUtils.rgbToCMYK(rgb),
+    rgba: [...rgb, 1],
+    rgbaString: `rgba(${rgb.join(", ")}, 1)`,
+    rgbFloat: rgb.map((v) => v / 255),
+    hsv: GlazeUtils.rgbToHSV ? GlazeUtils.rgbToHSV(rgb) : null,
+    hsl: GlazeUtils.rgbToHSL ? GlazeUtils.rgbToHSL(rgb) : null,
+    cmyk: GlazeUtils.rgbToCMYK ? GlazeUtils.rgbToCMYK(rgb) : null,
   };
 }
 
 // ===== Gradients =====
 export const GlazeNamedGradients = {
   ...GlazeGradients,
-  // Contoh gradient otomatis tambahan
   redToBlue: generateGradient("#EF4444", "#3B82F6", 90),
   greenToCyan: generateGradient("#22C55E", "#06B6D4", 135),
   orangeToPink: generateGradient("#F97316", "#EC4899", 45),
 };
 
-// ===== Export all-in-one =====
+// ===== Export all-in-one Glaze bundle =====
 export const GlazeAll = {
-  GlazeBasicColors,
-  GlazeExtendedColors,
-  GlazeVariantsColors,
+  // Colors
+  GlazeExpertColors,
   GlazeNamedColors,
+
+  // Palettes & Themes
+  GlazePalettes,
+  GlazeThemes,
+
+  // Accessibility
+  GlazeAccessibility,
+
+  // Utilities
+  GlazeUtils,
   GlazeGradients,
   GlazeNamedGradients,
-  GlazeUtils,
   generateGradient,
 };
