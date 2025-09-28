@@ -6,7 +6,6 @@ export { GlazeExtendedColors } from "./GlazeExtendedColors.js";
 export { GlazeVariantsColors } from "./GlazeVariantsColors.js";
 export { GlazeNamedColors } from "./GlazeNamedColors.js";
 export { GlazeGradients, generateGradient } from "./GlazeGradients.js";
-export * as GlazeUtils from "./GlazeUtils.js";
 
 // All-in-one export
 export * as GlazeAll from "./GlazeAll.js";
