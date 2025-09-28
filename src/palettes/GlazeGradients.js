@@ -1,6 +1,3 @@
-// ==================== GlazeGradients.js ====================
-
-// Preset manual
 export const GlazeGradients = {
   sunset: "linear-gradient(45deg, #F97316, #FB7185)",
   ocean: "linear-gradient(90deg, #0EA5E9, #3B82F6)",
@@ -12,8 +9,3 @@ export const GlazeGradients = {
   tealWave: "linear-gradient(45deg, #14B8A6, #5EEAD4)",
   limeGlow: "linear-gradient(60deg, #84CC16, #A3E635)",
 };
-
-// Function generate gradient otomatis dari dua warna hex
-export function generateGradient(hex1, hex2, deg=90) {
-  return `linear-gradient(${deg}deg, ${hex1}, ${hex2})`;
-}
