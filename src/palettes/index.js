@@ -10,6 +10,10 @@ export { GlazeNamedColors } from "./GlazeNamedColors.js";
 
 // Gradients preset dan helper
 export { GlazeGradients, generateGradient } from "./GlazeGradients.js";
+export { GlazeNamedGradients } from "./GlazeNamedColors.js";
 
-// Semua helper / util
+// Semua helper / util (hanya dari 1 sumber)
 export * as GlazeUtils from "./GlazeUtils.js";
+
+// All-in-one bundle (opsional, untuk konsumsi langsung)
+export { GlazeAll } from "./GlazeAll.js"; 
