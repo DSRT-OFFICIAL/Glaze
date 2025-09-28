@@ -5,7 +5,6 @@ import { GlazeExtendedColors } from "./GlazeExtendedColors";
 import { GlazeVariantsColors } from "./GlazeVariantsColors";
 import { GlazeNamedColors } from "./GlazeNamedColors";
 import { GlazeGradients, generateGradient } from "./GlazeGradients";
-import * as GlazeUtils from "./GlazeUtils";
 import * as GlazeAll from "./GlazeAll";
 
 export { GlazeBasicColors };
@@ -14,7 +13,6 @@ export { GlazeVariantsColors };
 export { GlazeNamedColors };
 export { GlazeGradients };
 export { generateGradient };
-export { GlazeUtils };
 
 // All-in-one export
 export { GlazeAll };
